@@ -42,6 +42,21 @@ jobs:
           name: ajazz-time-correction-tool-linux-x86_64
           path: target/release/ajazz-time-correction-tool
 
+  # --- Job to verify the native Nix package ---
+  build-nix:
+    name: Build with Nix
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+
+      - name: Check flake
+        run: nix flake check --print-build-logs
+
   # --- Job to build the Windows executable ---
   build-windows:
     name: Build for Windows
