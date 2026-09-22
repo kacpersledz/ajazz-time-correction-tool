@@ -5,8 +5,8 @@
 
   outputs =
     {
-      self,
       nixpkgs,
+      ...
     }:
     let
       system = "x86_64-linux";
@@ -16,7 +16,7 @@
         pname = cargoToml.package.name;
         version = cargoToml.package.version;
 
-        src = self;
+        src = ./.;
 
         cargoLock.lockFile = ./Cargo.lock;
 
